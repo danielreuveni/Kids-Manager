@@ -1,1 +1,3 @@
 # Kidz-Manager
+
+Anadroid application.
