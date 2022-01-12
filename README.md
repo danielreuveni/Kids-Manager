@@ -1,3 +1,3 @@
-# Kidz-Manager
+# Kids-Manager
 
 Anadroid application.
