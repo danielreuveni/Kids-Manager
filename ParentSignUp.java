@@ -1,5 +1,6 @@
 package com.example.myapplication2;
 
+
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class ParentSignUp extends AppCompatActivity {
@@ -25,7 +28,7 @@ public class ParentSignUp extends AppCompatActivity {
     EditText confirmPassword;
     Button sign_up;
     EditText name;
-    Connection connection;
+    Connection connection1;
     Statement statement;
     TextView status;
 
@@ -45,10 +48,29 @@ public class ParentSignUp extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 new ParentSignUp.registerUser().execute("");
+                /*status = (TextView) findViewById(R.id.status);
+                ConnectionClass c = new ConnectionClass();
+                connection = c.conclass();
+                /*if (c != null) {
+                    try{
+                        String sqlstatement = "SELECT name FROM Register";
+                        Statement smt = connection.createStatement();
+                        ResultSet set = smt.executeQuery(sqlstatement);
+                        while (set.next()) {
+                            status.setText(set.getString(2));
+                        }
+                        connection.close();
+
+                    } catch (Exception e) {
+                        Log.e("Error: ", e.getMessage());
+                    }
+                }*/
             }
         });
 
     }
+
+
 
     public class registerUser extends AsyncTask<String, String, String>{
 
@@ -70,26 +92,28 @@ public class ParentSignUp extends AppCompatActivity {
             name.setText("");
             email.setText("");
             password.setText("");
+            confirmPassword.setText("");
         }
 
         @Override
         protected String doInBackground(String... strings) {
             try {
-                connection = connection_class(ConnectionClass.user_name.toString(), ConnectionClass.password.toString(),
+                connection1 = connection_class(ConnectionClass.user_name.toString(), ConnectionClass.password.toString(),
                         ConnectionClass.database.toString(), ConnectionClass.ip.toString());
-                if (connection == null) {
+                if (connection1 == null) {
                     z = "Check Internet Connection";
+
                 }
                 else {
-                    String sql = "INSERT INTO Register (name,email,password) VALUES ('"+name.getText()+"','"+email.getText()
-                            +"','"+password.getText();
-                    statement = connection.createStatement();
+                    String sql = "INSERT INTO test (name,password, email) VALUES ('"+ name.getText() +"', '"+ password.getText() +"', '" + email.getText()+ "')";
+                    statement = connection1.createStatement();
                     statement.executeUpdate(sql);
                 }
             }
             catch (Exception e) {
                 isSuccess = false;
                 z = e.getMessage();
+
             }
             return null;
         }
@@ -99,14 +123,16 @@ public class ParentSignUp extends AppCompatActivity {
     public Connection connection_class (String user, String password, String database, String server) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        Connection connetion = null;
+        Connection connection = null;
         String connectionUrl = null;
         try{
             Class.forName("net.sourceforge.jtds.jdbc.Driver");
-            connectionUrl = "jdbc:jtds:sqlserver://" + server+"/" + database + ";user=" + user + ";password=" + password + ";";
-            connection = DriverManager.getConnection(connectionUrl);
+            String url = "jdbc:jtds:sqlserver://192.168.1.7:1433;databaseName=tests;instance=SQLSERVER;user=dani;password=1234";
+            connectionUrl = "jdbc:jtds:sqlserver://" + server + "/" + database + ";user=" + user + ";"+"password=" + password + ";";
+            connection = DriverManager.getConnection(url);
         }catch (Exception e){
             Log.e("SQL Connection Error : ", e.getMessage());
+            status.setText(e.getMessage());
         }
 
         return connection;

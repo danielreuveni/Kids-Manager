@@ -41,7 +41,7 @@ public class ParentSignIn extends AppCompatActivity {
             public void onClick(View view) {
                 switch (view.getId()) {
                     case R.id.button2:
-                        new ParentSignIn.checkLogin().execute("");
+                        //new ParentSignIn.checkLogin().execute("");
                 }
             }
         });
@@ -57,7 +57,7 @@ public class ParentSignIn extends AppCompatActivity {
             }
         });
     }
-
+/*
     public class checkLogin extends AsyncTask<String, String, String> {
 
         String z = null;
@@ -125,7 +125,7 @@ public class ParentSignIn extends AppCompatActivity {
             }
             return z;
         }
-    }
+    }*/
 
     @SuppressLint("NewApi")
     public Connection connectionClass(String user, String password, String database, String server){
