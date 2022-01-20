@@ -12,45 +12,6 @@ Stop at sql server problem. port = 1433
 
 package com.example.myapplication2;
 
-import android.annotation.SuppressLint;
-import android.os.StrictMode;
-import android.util.Log;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-
-public class ConnectionClass {
-    public static String ip= "192.168.1.7:1433"; // SQL Server IP Address
-    public static String user_name ="dani"; // SQL Server User name
-    public static String password = "1234"; // SQL Server Password
-    public static String database = "tests"; // SQL Server Database
-
-    /*Connection con;
-
-    @SuppressLint("NewApi")
-    public Connection conclass() {
-        String ip = "192.168.1.7", port = "1433", db = "KidsManager", username = "DESKTOP-1QIGJNA\\SQLSERVER", password = "Dbhtk100";
-        StrictMode.ThreadPolicy a = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(a);
-        String connectURL = null;
-
-        try {
-            Class.forName("net.sourceforge.jtds.jdbc.Driver");
-            connectURL = "jdbc:jtds:sqlserver://" + ip + ":" + port + ";databasename=" + db + ";user=" + username + ";"+"password=" + password + ";";
-            con = DriverManager.getConnection(connectURL);
-        } catch (Exception e) {
-            Log.e("Error :", e.getMessage());
-        }
-        return con;
-    }*/
-
-
-}
-
-
-package com.example.myapplication2;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
@@ -178,11 +139,11 @@ public class ParentSignUp extends AppCompatActivity {
         String connectionUrl = null;
         try{
             Class.forName("net.sourceforge.jtds.jdbc.Driver");
-            String url = "jdbc:jtds:sqlserver://192.168.1.7:1433;databasename=tests;integratedSecurity=true;";
+            String url = "jdbc:jtds:sqlserver://192.168.1.7:1433;databaseName=tests;instance=SQLSERVER;user=dani;password=1234";
             String userName = "DESKTOP-1QIGJNA\\dr100";
             String pw = "Dbhtk100";
             connectionUrl = "jdbc:jtds:sqlserver://" + server + "/" + database + ";user=" + user + ";"+"password=" + password + ";";
-            connection = DriverManager.getConnection(connectionUrl);
+            connection = DriverManager.getConnection(url);
             //connection = DriverManager.getConnection(url, userName, pw);
         }catch (Exception e){
             Log.e("SQL Connection Error : ", e.getMessage());
