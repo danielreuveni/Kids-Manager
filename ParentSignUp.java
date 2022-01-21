@@ -105,7 +105,7 @@ public class ParentSignUp extends AppCompatActivity {
 
                 }
                 else {
-                    String sql = "INSERT INTO test (name,password, email) VALUES ('"+ name.getText() +"', '"+ password.getText() +"', '" + email.getText()+ "')";
+                    String sql = "INSERT INTO test (userid, name, password, email) SELECT 1 + MAX (userid), '"+ name.getText()+ "', '" + password.getText() +"', '" + email.getText()+ "' FROM test";
                     statement = connection1.createStatement();
                     statement.executeUpdate(sql);
                 }
