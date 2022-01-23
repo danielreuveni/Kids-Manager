@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>RESTful_API</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+    
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="JsonServices">
+      <HintPath>..\..\..\OneDrive\שולחן העבודה\jsondllfiles\json dll files\JsonServices.dll</HintPath>
+    </Reference>
+    <Reference Include="JsonServices.Web">
+      <HintPath>..\..\..\OneDrive\שולחן העבודה\jsondllfiles\json dll files\JsonServices.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\OneDrive\שולחן העבודה\jsondllfiles\json dll files\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+
+  </ItemGroup>
+
+</Project>
